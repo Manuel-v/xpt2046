@@ -114,20 +114,26 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 
     value = xpt2046_get_touch_data(0xB0, 3);  // Z; pressure; touch detect
 	Z = value;
+  	LOG(LL_INFO, ("****xpt2046_read_touch linea_1  at Z:%d", Z));
+
 	if (value <= 50)  goto exit;
 
 	// touch panel pressed
 	value = xpt2046_get_touch_data(0xD0, 10);
+  	LOG(LL_INFO, ("****xpt2046_read_touch linea_2  at x value:%d", value));
+
 	if (value < 0)  goto exit;
 
 	X = value;
 
 	value = xpt2046_get_touch_data(0x90, 10);
+  	LOG(LL_INFO, ("****xpt2046_read_touch linea_3  at y value:%d", value));
+
 	if (value < 0)  goto exit;
 
 	Y = value;
 	res = 1;
-  LOG(LL_INFO, ("****xpt2046_read_touch linea_1  at X:%d, Y:%d Z:%d", X, Y, Z));
+  LOG(LL_INFO, ("****xpt2046_read_touch linea_4  at X:%d, Y:%d Z:%d", X, Y, Z));
 
 
 exit:
@@ -138,7 +144,7 @@ exit:
 	*x = X;
 	*y = Y;
 	*z = Z;
-  LOG(LL_INFO, ("****xpt2046_read_touch linea_2  at X:%d, Y:%d Z:%d", X, Y, Z));
+  LOG(LL_INFO, ("****xpt2046_read_touch linea_5  at X:%d, Y:%d Z:%d", X, Y, Z));
 
 	return res;
 }
