@@ -223,7 +223,12 @@ void xpt2046_intr_handler(const int pin, void *arg)
 	if (!pin_state)
 	{
 
+  	LOG(LL_INFO, ("****xpt2046_intr_handler linea_2  at X:%d, Y:%d Z:%d", tx, ty, tz));
+
+
 		if ((touch_state = xpt2046_read_touch(&tx, &ty, &tz))) {
+  			LOG(LL_INFO, ("****xpt2046_intr_handler linea_3  at X:%d, Y:%d Z:%d", tx, ty, tz));
+
 
 			// To avoid an interrupt flood from touch, set a timer and disable the interrupt
 			mgos_set_timer(100, 0, xpt2046_read_timer_cb, (void *)pin);
@@ -239,6 +244,8 @@ void xpt2046_intr_handler(const int pin, void *arg)
 		}
 		else
 		{
+  			LOG(LL_INFO, ("****xpt2046_intr_handler linea_4  at X:%d, Y:%d Z:%d", tx, ty, tz));
+
 	        ed.length=1;
 	        ed.direction = TOUCH_UP;
 	        ed.x = 0;
