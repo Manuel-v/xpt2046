@@ -136,6 +136,7 @@ exit:
 	*x = X;
 	*y = Y;
 	*z = Z;
+  LOG(LL_INFO, ("****xpt2046_read_touch  at X:%d, Y:%d Z:%d", X, Y, Z));
 
 	return res;
 }
