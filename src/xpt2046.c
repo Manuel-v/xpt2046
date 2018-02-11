@@ -127,6 +127,8 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 
 	Y = value;
 	res = 1;
+  LOG(LL_INFO, ("****xpt2046_read_touch linea_1  at X:%d, Y:%d Z:%d", X, Y, Z));
+
 
 exit:
 //	spi_lobo_device_deselect(xpt0246_spi);
@@ -136,7 +138,7 @@ exit:
 	*x = X;
 	*y = Y;
 	*z = Z;
-  LOG(LL_INFO, ("****xpt2046_read_touch  at X:%d, Y:%d Z:%d", X, Y, Z));
+  LOG(LL_INFO, ("****xpt2046_read_touch linea_2  at X:%d, Y:%d Z:%d", X, Y, Z));
 
 	return res;
 }
