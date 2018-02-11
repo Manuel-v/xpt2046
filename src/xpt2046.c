@@ -54,7 +54,9 @@ static int xpt2046_read_data(uint8_t type)
 	res = (rxbuf[0] << 8) | rxbuf[1];
   	//LOG(LL_INFO, ("****xpt2046_read_data linea_1  type:%d res:%d", type, res));
 
-  	LOG(LL_INFO, ("****xpt2046_read_data linea_1 res:%d", res));
+  	//LOG(LL_INFO, ("****xpt2046_read_data linea_1 res:%d", res));
+
+  	LOG(LL_INFO, ("****xpt2046_read_data linea_1 res:"));
 
     return res;
 }
