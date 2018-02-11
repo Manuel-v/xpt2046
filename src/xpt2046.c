@@ -56,7 +56,7 @@ static int xpt2046_read_data(uint8_t type)
 
   	//LOG(LL_INFO, ("****xpt2046_read_data linea_1 res:%d", res));
 
-  	LOG(LL_INFO, ("****xpt2046_read_data linea_1 res:"));
+  	LOG(LL_INFO, ("res:"));
 
     return res;
 }
