@@ -217,6 +217,8 @@ void xpt2046_intr_handler(const int pin, void *arg)
 	const bool pin_state = mgos_gpio_read(pin);
 	int touch_state = 0;
 	int tx=0, ty=0, tz;
+  LOG(LL_INFO, ("****xpt2046_intr_handler linea_1  at X:%d, Y:%d Z:%d", tx, ty, tz));
+
 
 	if (!pin_state)
 	{
