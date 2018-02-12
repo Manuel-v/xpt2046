@@ -296,8 +296,8 @@ bool mgos_xpt2046_init(void)
 #endif
 
 #if defined(USE_GLOBAL_SPI) && (USE_GLOBAL_SPI == 0)
-	xpt2046_spi = mgos_spi_create(&xpt2046_bus_cfg);
-	xpt2046_bus_cfg = xpt2046_bus_cfg;
+	xpt2046_spi = mgos_spi_create(&ep_bus_cfg);
+	xpt2046_bus_cfg = ep_bus_cfg;
 #else
 	xpt2046_spi = mgos_spi_get_global();
 #endif
