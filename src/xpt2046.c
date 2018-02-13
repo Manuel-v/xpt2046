@@ -14,7 +14,7 @@
 static struct mgos_spi *xpt2046_spi;
 static struct mgos_spi_txn xpt2046_txn;
 #if defined(USE_GLOBAL_SPI) && (USE_GLOBAL_SPI == 0)
-static struct mgos_config_spi xp2046_bus_cfg;
+static struct mgos_config_spi xpt2046_bus_cfg;
 #endif
 
 uint32_t tp_calx = TP_CALX_XPT2046;
