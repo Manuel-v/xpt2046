@@ -291,7 +291,8 @@ bool mgos_xpt2046_init(void)
 	  .miso_gpio = mgos_sys_config_get_spi_miso_gpio(),
 	  .mosi_gpio = mgos_sys_config_get_spi_mosi_gpio(),
 	  .sclk_gpio = mgos_sys_config_get_spi_sclk_gpio(),
-	  .cs0_gpio = mgos_sys_config_get_xpt2046_cs_pin(),
+	  //.cs0_gpio = mgos_sys_config_get_xpt2046_cs_pin(),
+	  .cs0_gpio = 32,
 	  .debug = true,
 	};
 #endif
