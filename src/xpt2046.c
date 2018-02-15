@@ -69,7 +69,7 @@ static uint16_t s_max_y = 320;
 
 //static uint8_t stmpe610_spi_read_register(uint8_t reg) {
 //pendiente cambiar el tipo devuelto de uint8_t a int
-static uint8_t xpt2046_read_data(uint8_t type) {
+static int xpt2046_read_data(uint8_t type) {
   struct mgos_spi *spi = mgos_spi_get_global();
   if (!spi) {
     LOG(LL_ERROR, ("Cannot get global SPI bus"));
@@ -79,7 +79,9 @@ static uint8_t xpt2046_read_data(uint8_t type) {
   //uint8_t tx_data = 0x80 | type;
   uint8_t tx_data = type;
   uint8_t rx_data;
-
+  int res;
+  uint8_t rxbuf[2];
+//**mv
   struct mgos_spi_txn txn = {
 //      .cs = mgos_sys_config_get_stmpe610_cs_index(),
       .cs = mgos_sys_config_get_xpt2046_cs_index(),
@@ -88,17 +90,30 @@ static uint8_t xpt2046_read_data(uint8_t type) {
       .freq = 1000000,
   };
   txn.hd.tx_len = 1;
-  txn.hd.tx_data = &tx_data;
+  //txn.hd.tx_data = &tx_data;
+  txn.hd.tx_data = &type;
   txn.hd.dummy_len = 0;
-  txn.hd.rx_len = 1;
-  txn.hd.rx_data = &rx_data;
-  if (!mgos_spi_run_txn(spi, false, &txn)) {
+//  txn.hd.rx_len = 1;
+  txn.hd.rx_len = 2;
+//  txn.hd.rx_data = &rx_data;
+//  txn.hd.rx_data = &rx_data;
+  txn.hd.rx_data = rxbuf;
+
+//**mv 	if (!mgos_spi_run_txn(xpt2046_spi, false /* full_duplex */, &xpt2046_txn)) {
+//**mv 		LOG(LL_ERROR, ("SPI transaction failed"));
+//**mv 		return -1;
+//**mv 	}
+
+ // if (!mgos_spi_run_txn(spi, false, &txn)) {
+  if (!mgos_spi_run_txn(spi, false, txn)) {
     LOG(LL_ERROR, ("SPI transaction failed"));
     return 0;
   }
+	res = (rxbuf[0] << 8) | rxbuf[1];
   // pendiente de convertir rx_data de uint8_t a int
   //rx_data = 34;
-  return rx_data;
+  //return rx_data;
+   return res;
 }
 
 //**************fin nueva********************
