@@ -10,7 +10,7 @@
 /***************************************************************************************
 ***************************************************************************************/
 //#define USE_GLOBAL_SPI 1
-#define USE_GLOBAL_SPI 0
+//#define USE_GLOBAL_SPI 0
 
 static struct mgos_spi *xpt2046_spi;
 static struct mgos_spi_txn xpt2046_txn;
@@ -82,7 +82,8 @@ static uint8_t xpt2046_read_data(uint8_t type) {
   struct mgos_spi_txn txn = {
 //      .cs = mgos_sys_config_get_stmpe610_cs_index(),
       .cs = mgos_sys_config_get_xpt2046_cs_index(),
-      .mode = 0,
+//      .mode = 0,
+      .mode = 3,
       .freq = 1000000,
   };
   txn.hd.tx_len = 1;
@@ -95,7 +96,7 @@ static uint8_t xpt2046_read_data(uint8_t type) {
     return 0;
   }
   // pendiente de convertir rx_data de uint8_t a int
-  rx_data = 22;
+  rx_data = 34;
   return rx_data;
 }
 
