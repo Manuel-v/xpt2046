@@ -81,7 +81,7 @@ static uint8_t xpt2046_read_data(uint8_t type) {
 
   struct mgos_spi_txn txn = {
 //      .cs = mgos_sys_config_get_stmpe610_cs_index(),
-      .cs = 0,
+      .cs = mgos_sys_config_get_xpt2046.cs_index(),
       .mode = 0,
       .freq = 1000000,
   };
