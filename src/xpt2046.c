@@ -37,31 +37,31 @@ static uint16_t s_max_y = 320;
 // get 16-bit data from touch controller for specified type
 // ** Touch device must already be selected **
 //----------------------------------------
-static int xpt2046_read_data(uint8_t type)
-{
-	int res;
-	uint8_t rxbuf[2];
+//**mv static int xpt2046_read_data(uint8_t type)
+//**mv {
+//**mv 	int res;
+//**mv 	uint8_t rxbuf[2];
+//**mv 
+//**mv 	xpt2046_txn.hd.tx_len = 1;
+//**mv 	xpt2046_txn.hd.tx_data = &type;
+//**mv 	xpt2046_txn.hd.dummy_len = 0;
+//**mv 	xpt2046_txn.hd.rx_len = 2;
+//**mv 	xpt2046_txn.hd.rx_data = rxbuf;
+//**mv 
+//**mv 	if (!mgos_spi_run_txn(xpt2046_spi, false /* full_duplex */, &xpt2046_txn)) {
+//**mv 		LOG(LL_ERROR, ("SPI transaction failed"));
+//**mv 		return -1;
+//**mv 	}
 
-	xpt2046_txn.hd.tx_len = 1;
-	xpt2046_txn.hd.tx_data = &type;
-	xpt2046_txn.hd.dummy_len = 0;
-	xpt2046_txn.hd.rx_len = 2;
-	xpt2046_txn.hd.rx_data = rxbuf;
-
-	if (!mgos_spi_run_txn(xpt2046_spi, false /* full_duplex */, &xpt2046_txn)) {
-		LOG(LL_ERROR, ("SPI transaction failed"));
-		return -1;
-	}
-
-	res = (rxbuf[0] << 8) | rxbuf[1];
-  	//LOG(LL_INFO, ("****xpt2046_read_data linea_1  type:%d res:%d", type, res));
-
-  	//LOG(LL_INFO, ("****xpt2046_read_data linea_1 res:%d", res));
-
-  	//LOG(LL_INFO, ("res:"));
-
-    return res;
-}
+//**mv 	res = (rxbuf[0] << 8) | rxbuf[1];
+//**mv   	//LOG(LL_INFO, ("****xpt2046_read_data linea_1  type:%d res:%d", type, res));
+//**mv 
+//**mv   	//LOG(LL_INFO, ("****xpt2046_read_data linea_1 res:%d", res));
+//**mv 
+//**mv   	//LOG(LL_INFO, ("res:"));
+//**mv 
+//**mv     return res;
+//**mv }
 
 // ***mv *sustitucion de la funcion de lectura del bus SPI*****
 
