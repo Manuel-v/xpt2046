@@ -69,14 +69,14 @@ static uint16_t s_max_y = 320;
 
 //static uint8_t stmpe610_spi_read_register(uint8_t reg) {
 //pendiente cambiar el tipo devuelto de uint8_t a int
-static uint8_t xpt2046_read_data(uint8_t reg) {
+static uint8_t xpt2046_read_data(uint8_t type) {
   struct mgos_spi *spi = mgos_spi_get_global();
   if (!spi) {
     LOG(LL_ERROR, ("Cannot get global SPI bus"));
     return 0;
   }
 
-  uint8_t tx_data = 0x80 | reg;
+  uint8_t tx_data = 0x80 | type;
   uint8_t rx_data;
 
   struct mgos_spi_txn txn = {
