@@ -32,7 +32,8 @@ static uint16_t s_max_y = 320;
 // ============= Touch panel functions =========================================
 
 
-
+// ***mv *sustitucion de la funcion de lectura del bus SPI*****
+// ***mv le cambiamos el nombre para mantenerla provisionalmente
 // get 16-bit data from touch controller for specified type
 // ** Touch device must already be selected **
 //----------------------------------------
@@ -62,6 +63,41 @@ static int xpt2046_read_data(uint8_t type)
     return res;
 }
 
+// ***mv *sustitucion de la funcion de lectura del bus SPI*****
+
+//**************nueva************************
+
+//static uint8_t stmpe610_spi_read_register(uint8_t reg) {
+//pendiente cambiar el tipo devuelto de uint8_t a int
+static uint8_t xpt2046_read_data(uint8_t reg) {
+  struct mgos_spi *spi = mgos_spi_get_global();
+  if (!spi) {
+    LOG(LL_ERROR, ("Cannot get global SPI bus"));
+    return 0;
+  }
+
+  uint8_t tx_data = 0x80 | reg;
+  uint8_t rx_data;
+
+  struct mgos_spi_txn txn = {
+      .cs = mgos_sys_config_get_stmpe610_cs_index(),
+      .mode = 0,
+      .freq = 1000000,
+  };
+  txn.hd.tx_len = 1;
+  txn.hd.tx_data = &tx_data;
+  txn.hd.dummy_len = 0;
+  txn.hd.rx_len = 1;
+  txn.hd.rx_data = &rx_data;
+  if (!mgos_spi_run_txn(spi, false, &txn)) {
+    LOG(LL_ERROR, ("SPI transaction failed"));
+    return 0;
+  }
+  // pendiente de convertir rx_data de uint8_t a int
+  return rx_data;
+}
+
+//**************fin nueva********************
 
 //-------------------------------------------------------
 static int xpt2046_get_touch_data(uint8_t type, int samples)
