@@ -105,7 +105,7 @@ static int xpt2046_read_data(uint8_t type) {
 //**mv 	}
 
  // if (!mgos_spi_run_txn(spi, false, &txn)) {
-  if (!mgos_spi_run_txn(spi, false, txn)) {
+  if (!mgos_spi_run_txn(spi, false, &txn)) {
     LOG(LL_ERROR, ("SPI transaction failed"));
     return 0;
   }
