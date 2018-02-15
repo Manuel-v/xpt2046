@@ -97,7 +97,7 @@ static uint8_t xpt2046_read_data(uint8_t type) {
     return 0;
   }
   // pendiente de convertir rx_data de uint8_t a int
-  rx_data = 34;
+  //rx_data = 34;
   return rx_data;
 }
 
