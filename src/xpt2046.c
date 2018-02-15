@@ -76,7 +76,8 @@ static uint8_t xpt2046_read_data(uint8_t type) {
     return 0;
   }
 
-  uint8_t tx_data = 0x80 | type;
+  //uint8_t tx_data = 0x80 | type;
+  uint8_t tx_data = type;
   uint8_t rx_data;
 
   struct mgos_spi_txn txn = {
