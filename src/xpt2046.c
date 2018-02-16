@@ -86,6 +86,7 @@ static int xpt2046_read_data(uint8_t type) {
 //      .cs = mgos_sys_config_get_stmpe610_cs_index(),
       .cs = mgos_sys_config_get_xpt2046_cs_index(),
 //      .mode = 0,
+		/* mode, 0-3. This controls clock phase and polarity. */
       .mode = 3,
       .freq = 1000000,
   };
@@ -97,7 +98,7 @@ static int xpt2046_read_data(uint8_t type) {
   txn.hd.rx_len = 2;
 //  txn.hd.rx_data = &rx_data;
 //  txn.hd.rx_data = &rx_data;
-  txn.hd.rx_data = rxbuf;
+  txn.hd.rx_data = &rxbuf;
 
 //**mv 	if (!mgos_spi_run_txn(xpt2046_spi, false /* full_duplex */, &xpt2046_txn)) {
 //**mv 		LOG(LL_ERROR, ("SPI transaction failed"));
