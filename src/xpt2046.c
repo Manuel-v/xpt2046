@@ -200,7 +200,7 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 	value = xpt2046_get_touch_data(0x90, 10);
   	//LOG(LL_INFO, ("****xpt2046_read_touch linea_3  at y value:%d", value));
 
-  LOG(LL_INFO, ("****xpt2046_read_touch linea_4  at X:%d, Y:%d Z:%d", X, Y, Z));
+  //LOG(LL_INFO, ("****xpt2046_read_touch linea_4  at X:%d, Y:%d Z:%d", X, Y, Z));
 	if (value < 0)  goto exit;
 
 	Y = value;
