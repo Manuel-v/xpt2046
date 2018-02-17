@@ -124,7 +124,7 @@ static int xpt2046_read_data(uint8_t type) {
 //-------------------------------------------------------
 static int xpt2046_get_touch_data(uint8_t type, int samples)
 {
-  	LOG(LL_INFO, ("****xpt2046_get_touch_data linea_127  type:%d samples:%d", type, samples));
+  	//LOG(LL_INFO, ("****xpt2046_get_touch_data linea_127  type:%d samples:%d", type, samples));
 
 	if (xpt2046_spi == (void *)NULL) return 0;
 
@@ -164,7 +164,8 @@ static int xpt2046_get_touch_data(uint8_t type, int samples)
 	if (result < 0) return -1;
 	val = avg;
 
-  	LOG(LL_INFO, ("****xpt2046_get_touch_data linea_167 resultado val:%d", val));
+  	LOG(LL_INFO, ("****xpt2046_get_touch_data linea_127  type:%d samples:%d resultado val:%d", type, samples, val));
+  	//LOG(LL_INFO, ("****xpt2046_get_touch_data linea_167 resultado val:%d", val));
 	
     return val;
 }
@@ -185,7 +186,8 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 	Z = value;
   	LOG(LL_INFO, ("****xpt2046_read_touch linea_1  at Z:%d", Z));
 
-	//**mv if (value <= 50)  goto exit;
+	if (value <= 50)  goto exit;
+	//if (value <= 08)  goto exit;
 
 	// touch panel pressed
 	value = xpt2046_get_touch_data(0xD0, 10);
