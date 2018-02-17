@@ -114,7 +114,7 @@ static int xpt2046_read_data(uint8_t type) {
 	res = (rxbuf[0] << 8) | rxbuf[1];
   // pendiente de convertir rx_data de uint8_t a int
   //rx_data = 34;
-  res = 95;
+  //res = 95;
   //return rx_data;
    return res;
 }
