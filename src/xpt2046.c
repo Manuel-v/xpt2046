@@ -88,7 +88,8 @@ static int xpt2046_read_data(uint8_t type) {
 //      .mode = 0,
 		/* mode, 0-3. This controls clock phase and polarity. */
       .mode = 3,
-      .freq = 1000000,
+      //.freq = 1000000,
+      .freq = 500000,
   };
   txn.hd.tx_len = 1;
   //txn.hd.tx_data = &tx_data;
@@ -123,7 +124,7 @@ static int xpt2046_read_data(uint8_t type) {
 //-------------------------------------------------------
 static int xpt2046_get_touch_data(uint8_t type, int samples)
 {
-  	LOG(LL_INFO, ("****xpt2046_get_touch_data linea_1  type:%d samples:%d", type, samples));
+  	LOG(LL_INFO, ("****xpt2046_get_touch_data linea_127  type:%d samples:%d", type, samples));
 
 	if (xpt2046_spi == (void *)NULL) return 0;
 
@@ -163,6 +164,8 @@ static int xpt2046_get_touch_data(uint8_t type, int samples)
 	if (result < 0) return -1;
 	val = avg;
 
+  	LOG(LL_INFO, ("****xpt2046_get_touch_data linea_167 resultado val:%d", val));
+	
     return val;
 }
 
