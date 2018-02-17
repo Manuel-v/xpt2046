@@ -186,7 +186,7 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 	Z = value;
   	//LOG(LL_INFO, ("****xpt2046_read_touch linea_1  at Z:%d", Z));
 
-	//if (value <= 50)  goto exit;
+	if (value <= 50)  goto exit;
 	//if (value <= 8)  goto exit;
 
 	// touch panel pressed
