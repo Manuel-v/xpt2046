@@ -85,11 +85,11 @@ static int xpt2046_read_data(uint8_t type) {
   struct mgos_spi_txn txn = {
 //      .cs = mgos_sys_config_get_stmpe610_cs_index(),
       .cs = mgos_sys_config_get_xpt2046_cs_index(),
-//      .mode = 0,
+      .mode = 0,
 		/* mode, 0-3. This controls clock phase and polarity. */
-      .mode = 3,
+      //.mode = 3,
       //.freq = 1000000,
-      .freq = 500000,
+      .freq = 1000000,
   };
   txn.hd.tx_len = 1;
   //txn.hd.tx_data = &tx_data;
@@ -200,12 +200,8 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 	value = xpt2046_get_touch_data(0x90, 10);
   	//LOG(LL_INFO, ("****xpt2046_read_touch linea_3  at y value:%d", value));
 
-	if (value < 0)  
-	{
-		LOG(LL_INFO, ("****xpt2046_read_touch linea_4  exit at X:%d, Y:%d Z:%d", X, Y, Z));
-		goto exit;
-	}
-
+	if (value < 0)  goto exit;
+		
 	Y = value;
 	res = 1;
 
@@ -213,8 +209,11 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 exit:
 //	spi_lobo_device_deselect(xpt0246_spi);
 
-   	if (value == 0) return 0;
-
+   	if (value == 0) 
+	{
+		LOG(LL_INFO, ("****xpt2046_read_touch linea_4  exit value <=0 ó <=50 at X:%d, Y:%d Z:%d", X, Y, Z));
+		return 0;
+	}
 	*x = X;
 	*y = Y;
 	*z = Z;
