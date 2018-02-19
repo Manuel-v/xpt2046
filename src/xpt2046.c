@@ -281,7 +281,7 @@ void xpt2046_read_timer_cb(void *arg)
 		xpt_last_touch.length++;
 		xpt_last_touch.z = tz;
 
-		mgos_set_timer(100, 0, xpt2046_read_timer_cb, (void *)pin);
+		mgos_set_timer(1000, 0, xpt2046_read_timer_cb, (void *)pin);
 	} else {
 		xpt_last_touch.direction = TOUCH_UP;
 		mgos_gpio_enable_int(pin);
@@ -313,7 +313,7 @@ void xpt2046_intr_handler(const int pin, void *arg)
 
 
 			// To avoid an interrupt flood from touch, set a timer and disable the interrupt
-			mgos_set_timer(100, 0, xpt2046_read_timer_cb, (void *)pin);
+			mgos_set_timer(1000, 0, xpt2046_read_timer_cb, (void *)pin);
 			mgos_gpio_disable_int(pin);
 
 			xpt2046_map_rotation(tx, ty, &ed.x, &ed.y);
