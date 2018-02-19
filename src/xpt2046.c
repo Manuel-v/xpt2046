@@ -89,7 +89,7 @@ static int xpt2046_read_data(uint8_t type) {
 		/* mode, 0-3. This controls clock phase and polarity. */
       //.mode = 3,
       //.freq = 1000000,
-      .freq = 1000000,
+      .freq = 100000,
   };
   txn.hd.tx_len = 1;
   //txn.hd.tx_data = &tx_data;
