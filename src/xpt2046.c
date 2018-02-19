@@ -92,8 +92,8 @@ static int xpt2046_read_data(uint8_t type) {
       .freq = 100000,
   };
   txn.hd.tx_len = 1;
-  //txn.hd.tx_data = &tx_data;
-  txn.hd.tx_data = &type;
+  txn.hd.tx_data = &tx_data;
+  //txn.hd.tx_data = &type;
   txn.hd.dummy_len = 0;
 //  txn.hd.rx_len = 1;
   txn.hd.rx_len = 2;
