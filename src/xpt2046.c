@@ -76,8 +76,8 @@ static int xpt2046_read_data(uint8_t type) {
     return 0;
   }
 
-  uint8_t tx_data = 0x80 | type;
-  //uint8_t tx_data = type;
+  //uint8_t tx_data = 0x80 | type;
+  uint8_t tx_data = type;
   uint8_t rx_data;
   int res;
   uint8_t rxbuf[2];
