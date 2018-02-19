@@ -85,9 +85,9 @@ static int xpt2046_read_data(uint8_t type) {
   struct mgos_spi_txn txn = {
 //      .cs = mgos_sys_config_get_stmpe610_cs_index(),
       .cs = mgos_sys_config_get_xpt2046_cs_index(),
-      .mode = 0,
+      //.mode = 0,
 		/* mode, 0-3. This controls clock phase and polarity. */
-      //.mode = 3,
+      .mode = 3,
       //.freq = 1000000,
       .freq = 100000,
   };
@@ -183,7 +183,7 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 //	if (spi_lobo_device_select(xpt0246_spi, 0) != ESP_OK) return 0;
 
     value = xpt2046_get_touch_data(0xB0, 3);  // Z; pressure; touch detect
-  	LOG(LL_INFO, ("****xpt2046_read_touch linea_1 get_touch_data(0xB0, 3) at Z:%d", Z));
+  	LOG(LL_INFO, ("****xpt2046_read_touch linea_1 get_touch_data(0xB0, 3) at Z:%d", value));
 	Z = value;
 
 	//if (value <= 8)  goto exit;
