@@ -28,6 +28,33 @@ static mgos_xpt2046_event_t xpt_event_handler = NULL;
 static bool is_touching = false;
 static uint16_t s_max_x = 240;
 static uint16_t s_max_y = 320;
+//******xpt2046 notes *******
+/*
+Control Bits in the Control Byte
+(MSB) 														(LSB)
+Bit 7 	Bit 6 	Bit 5 	Bit 4 	Bit 3 	Bit 2 		Bit 1 	Bit 0
+	S 	A2 		A1 		A0 		MODE 	SER/DFR 	PD1 	PD0
+
+	class XPT2046(object):
+	
+	StartBit = 0b10000000 
+	
+	class ChannelSelect(object):
+		X_POSITION 		= 0b01010000
+		Y_POSITION 		= 0b00010000
+		Z1_POSITION 	= 0b00110000
+		Z2_POSITION 	= 0b01000000
+		TEMPERATURE_0 	= 0b00000000
+		TEMPERATURE_1 	= 0b01110000
+		BATTERY_VOLTAGE = 0b00100000
+		AUXILIARY 		= 0b01100000
+
+	class ConversionSelect(object):
+		_8_BIT  		= 0b00001000				//bit mode define la conversion de 8 o 12 bits
+		_12_BIT 		= 0b00000000
+		
+*/
+//******xpt2046 notes *******
 
 // ============= Touch panel functions =========================================
 
@@ -76,8 +103,11 @@ static int xpt2046_read_data(uint8_t type) {
     return 0;
   }
 
-  //uint8_t tx_data = 0x80 | type;
-  uint8_t tx_data = type;
+	//StartBit = 0b10000000    //control byte
+	//  | Binary OR Operator copies a bit if it exists in either operand.
+	//0x80 = 0b10000000
+  uint8_t tx_data = 0x80 | type;  //0x80 or type pone a 1 el bit de start siempre
+  //uint8_t tx_data = type;
   uint8_t rx_data;
   int res;
   uint8_t rxbuf[2];
