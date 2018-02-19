@@ -183,12 +183,12 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 //	if (spi_lobo_device_select(xpt0246_spi, 0) != ESP_OK) return 0;
 
     value = xpt2046_get_touch_data(0xB0, 3);  // Z; pressure; touch detect
+  	LOG(LL_INFO, ("****xpt2046_read_touch linea_1 get_touch_data(0xB0, 3) at Z:%d", Z));
 	Z = value;
 
 	//if (value <= 8)  goto exit;
 	if (value <= 50) 
 	{
-  	LOG(LL_INFO, ("****xpt2046_read_touch linea_1  no touch get_touch_data(0xB0, 3) at Z:%d", Z));
 		goto exit;
 	}
 	
