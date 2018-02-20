@@ -236,9 +236,10 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 	Z = value;
 
 	//if (value <= 8)  goto exit;
-	if (value <= 50) 
+	//if (value <= 50) 
+	if (value <= 20) 
 	{
-		//goto exit;
+		goto exit;
 	}
 	
 	// touch panel pressed
