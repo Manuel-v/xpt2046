@@ -53,6 +53,17 @@ Bit 7 	Bit 6 	Bit 5 	Bit 4 	Bit 3 	Bit 2 		Bit 1 	Bit 0
 		_8_BIT  		= 0b00001000				//bit mode define la conversion de 8 o 12 bits
 		_12_BIT 		= 0b00000000
 		
+
+		
+				//0xB0 = 0b10110000    //leemos Z1 ???  ok***
+				//0xD0 = 0b11010000    //leemos x ???  ok
+				//0x90 = 0b10010000    //leemos y ???  ok
+				//si ponemos el bit 2 a 0 	Power-down between conversions. When each
+											conversion is finished, the converter enters a low
+											power mode. At the start of the next conversion,
+											the device instantly powers up to full power.
+				//si ponemos el bit 3 a 0 estamos leyendo 12 bits
+
 */
 //******xpt2046 notes *******
 
@@ -106,6 +117,11 @@ static int xpt2046_read_data(uint8_t type) {
 	//StartBit = 0b10000000    //control byte
 	//  | Binary OR Operator copies a bit if it exists in either operand.
 	//0x80 = 0b10000000
+	
+	//0xB0 = 0b10110000    //leemos Z ???
+	//0xD0 = 0b11010000    //leemos x ???
+	//0x90 = 0b10010000    //leemos y ???
+
   uint8_t tx_data = 0x80 | type;  //0x80 or type pone a 1 el bit de start siempre
   //uint8_t tx_data = type;
   uint8_t rx_data;
@@ -115,9 +131,9 @@ static int xpt2046_read_data(uint8_t type) {
   struct mgos_spi_txn txn = {
 //      .cs = mgos_sys_config_get_stmpe610_cs_index(),
       .cs = mgos_sys_config_get_xpt2046_cs_index(),
-      //.mode = 0,
+      .mode = 0,
 		/* mode, 0-3. This controls clock phase and polarity. */
-      .mode = 3,
+      //.mode = 3,
       //.freq = 1000000,
       .freq = 100000,
   };
@@ -212,6 +228,7 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 
 //	if (spi_lobo_device_select(xpt0246_spi, 0) != ESP_OK) return 0;
 
+	//0xB0 = 0b10110000    //leemos Z ???
     value = xpt2046_get_touch_data(0xB0, 3);  // Z; pressure; touch detect
   	LOG(LL_INFO, ("****xpt2046_read_touch linea_1 get_touch_data(0xB0, 3) at Z:%d", value));
 	Z = value;
@@ -223,6 +240,7 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 	}
 	
 	// touch panel pressed
+	//0xD0 = 0b11010000    //leemos x ???
 	value = xpt2046_get_touch_data(0xD0, 10);
   	LOG(LL_INFO, ("****xpt2046_read_touch linea_2 get_touch_data(0xD0, 10) at x value:%d", value));
 
@@ -230,6 +248,7 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 
 	X = value;
 
+	//0x90 = 0b10010000    //leemos y ???
 	value = xpt2046_get_touch_data(0x90, 10);
   	LOG(LL_INFO, ("****xpt2046_read_touch linea_3 get_touch_data(0x90, 10) at y value:%d", value));
 
