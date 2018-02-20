@@ -35,6 +35,8 @@ Control Bits in the Control Byte
 Bit 7 	Bit 6 	Bit 5 	Bit 4 	Bit 3 	Bit 2 		Bit 1 	Bit 0
 	S 	A2 		A1 		A0 		MODE 	SER/DFR 	PD1 	PD0
 
+Bit 0 y 1 ----	(PD1 - PD0) select the power- down mode
+
 	class XPT2046(object):
 	
 	StartBit = 0b10000000 
@@ -58,7 +60,7 @@ Bit 7 	Bit 6 	Bit 5 	Bit 4 	Bit 3 	Bit 2 		Bit 1 	Bit 0
 				//0xB0 = 0b10110000    //leemos Z1 ???  ok***
 				//0xD0 = 0b11010000    //leemos x ???  ok
 				//0x90 = 0b10010000    //leemos y ???  ok
-				//si ponemos el bit 2 a 0 	Power-down between conversions. When each
+				//si ponemos el bit 0 y 1 a 0 	Power-down between conversions. When each
 											conversion is finished, the converter enters a low
 											power mode. At the start of the next conversion,
 											the device instantly powers up to full power.
@@ -236,7 +238,7 @@ int xpt2046_read_touch(int *x, int* y, int* z)
 	//if (value <= 8)  goto exit;
 	if (value <= 50) 
 	{
-		goto exit;
+		//goto exit;
 	}
 	
 	// touch panel pressed
