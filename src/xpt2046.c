@@ -140,15 +140,16 @@ static int xpt2046_read_data(uint8_t type) {
       .freq = 100000,
   };
   txn.hd.tx_len = 1;
-  txn.hd.tx_data = &tx_data;
+  //txn.hd.tx_data = &tx_data;
+  txn.hd.tx_data = tx_data;
   //txn.hd.tx_data = &type;
-  //txn.hd.dummy_len = 0;
-  txn.hd.dummy_len = 1;
+  txn.hd.dummy_len = 0;
 //  txn.hd.rx_len = 1;
   txn.hd.rx_len = 2;
 //  txn.hd.rx_data = &rx_data;
 //  txn.hd.rx_data = &rx_data;
-  txn.hd.rx_data = &rxbuf;
+  //txn.hd.rx_data = &rxbuf;
+  txn.hd.rx_data = rxbuf;
 
 //**mv 	if (!mgos_spi_run_txn(xpt2046_spi, false /* full_duplex */, &xpt2046_txn)) {
 //**mv 		LOG(LL_ERROR, ("SPI transaction failed"));
