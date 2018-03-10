@@ -268,13 +268,13 @@ exit:
 
    	if (value == 0) 
 	{
-		LOG(LL_INFO, ("****xpt2046_read_touch linea_4  exit value <=0 ó <=50 at X:%d, Y:%d Z:%d", X, Y, Z));
+		//LOG(LL_INFO, ("****xpt2046_read_touch linea_4  exit value <=0 ó <=50 at X:%d, Y:%d Z:%d", X, Y, Z));
 		return 0;
 	}
 	*x = X;
 	*y = Y;
 	*z = Z;
-	LOG(LL_INFO, ("****xpt2046_read_touch linea_5 ok  at X:%d, Y:%d Z:%d", X, Y, Z));
+	//LOG(LL_INFO, ("****xpt2046_read_touch linea_5 ok  at X:%d, Y:%d Z:%d", X, Y, Z));
 
 	return res;
 }
