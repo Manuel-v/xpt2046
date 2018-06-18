@@ -400,7 +400,8 @@ bool mgos_xpt2046_init(void)
 {
 	esp_err_t ret;
 
-	_lcd_orientation = mgos_sys_config_get_tft_orientation();
+	//_lcd_orientation = mgos_sys_config_get_tft_orientation();
+	_lcd_orientation = mgos_sys_config_get_xpt2046_orientation();
 
 	LOG(LL_INFO, ("XPT2046 irq pin '%d' cs index '%d'", mgos_sys_config_get_xpt2046_irq_pin(), mgos_sys_config_get_xpt2046_cs_index()));
 
