@@ -23,6 +23,8 @@ uint32_t tp_caly = TP_CALY_XPT2046;
 
 struct mgos_xpt2046_event_data xpt_last_touch;
 
+xpt_last_touch.direction = TOUCH_UP;  //evitar backlightkeepalive
+
 static enum mgos_xpt2046_rotation_t _lcd_orientation = XPT2046_PORTRAIT;
 static mgos_xpt2046_event_t xpt_event_handler = NULL;
 static bool is_touching = false;
