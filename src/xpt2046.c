@@ -23,7 +23,6 @@ uint32_t tp_caly = TP_CALY_XPT2046;
 
 struct mgos_xpt2046_event_data xpt_last_touch;
 
-xpt_last_touch.direction = TOUCH_UP;  //evitar backlightkeepalive
 
 static enum mgos_xpt2046_rotation_t _lcd_orientation = XPT2046_PORTRAIT;
 static mgos_xpt2046_event_t xpt_event_handler = NULL;
@@ -404,6 +403,7 @@ bool mgos_xpt2046_init(void)
 
 	//_lcd_orientation = mgos_sys_config_get_tft_orientation();
 	_lcd_orientation = mgos_sys_config_get_xpt2046_orientation();
+	xpt_last_touch.direction = TOUCH_UP;  //evitar backlightkeepalive
 
 	LOG(LL_INFO, ("XPT2046 irq pin '%d' cs index '%d'", mgos_sys_config_get_xpt2046_irq_pin(), mgos_sys_config_get_xpt2046_cs_index()));
 
