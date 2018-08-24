@@ -311,6 +311,12 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 	    *x_out = map(y, ymin, xmax, 0, s_max_x);
 	    *y_out = s_max_y - map(x, xmin, ymax, 0, s_max_y);
 	    break;
+	case XPT2046_LANDSCAPE_FLIP_REVERSE:  // 4
+	    //*x_out = map(y, ymin, xmax, 0, s_max_x);
+	    *x_out = s_max_y - map(x, xmin, xmax, 0, s_max_y);
+	    *y_out = s_max_y - map(x, xmin, ymax, 0, s_max_y);
+	  
+	    break;
 	default: // XPT2046_PORTRAIT
 	    *x_out = s_max_y - map(x, xmin, xmax, 0, s_max_y);
 	    *y_out = map(y, ymin, ymax, 0, s_max_x);

@@ -22,6 +22,7 @@ enum mgos_xpt2046_rotation_t {
   XPT2046_LANDSCAPE      = 1,
   XPT2046_PORTRAIT_FLIP  = 2,
   XPT2046_LANDSCAPE_FLIP = 3,
+  XPT2046_LANDSCAPE_FLIP_REVERSE = 4,
 };
 
 enum mgos_xpt2046_touch_t {
