@@ -331,8 +331,8 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 	    *y_out = map(y, ymin, ymax, 0, s_max_x);
 	}
 	
-	LOG(LL_INFO, (" x:%d, xmin:%d, xmax:%d, *x_out:%d", x, xmin, xmax, *x_out));
-	LOG(LL_INFO, (" y:%d, ymin:%d, ymax:%d, *y_out:%d", y, ymin, ymax, *y_out));
+	LOG(LL_INFO, (" x:%d, xmin:%d, xmax:%d, *x_out:%d, s_max_x:%d", x, xmin, xmax, *x_out, s_max_x));
+	LOG(LL_INFO, (" y:%d, ymin:%d, ymax:%d, *y_out:%d, s_max_y:%d", y, ymin, ymax, *y_out, s_max_y));
 	
 	
 }
