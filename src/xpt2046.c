@@ -305,8 +305,8 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 	const int ymax = (tp_caly >> 16) & 0x3FFF;
 	const int ymin = tp_caly & 0x3FFF;
 	
-	LOG(LL_INFO, (" xmin:%d, xmax:%d Z:%d", xmin, xmax));
-	LOG(LL_INFO, (" ymin:%d, ymax:%d Z:%d", ymin, ymax));
+	LOG(LL_INFO, (" xmin:%d, xmax:%d", xmin, xmax));
+	LOG(LL_INFO, (" ymin:%d, ymax:%d", ymin, ymax));
   
 	switch(_lcd_orientation)
 	{
