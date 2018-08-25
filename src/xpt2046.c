@@ -18,7 +18,7 @@ static struct mgos_spi_txn xpt2046_txn;
 static struct mgos_config_spi xpt2046_bus_cfg;
 #endif
 
-uint32_t tp_calx = TP_CALX_XPT2046;
+uint32_t tp_calx = TP_CALX_XPT2046;  //??
 uint32_t tp_caly = TP_CALY_XPT2046;
 
 struct mgos_xpt2046_event_data xpt_last_touch;
@@ -294,12 +294,19 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 {
 	//s_max_x = x;  //tama?o en pixel de la pantalla en eje x declarado en linea 471
 	//s_max_y = y;  //tama?o en pixel de la pantalla en eje y declarado en linea 472
+	//*x_out  //valor de la coordenada x retornado al programa
+	//*y_out  //valor de la coordenada y retornado al programa
+	//x valor a convertir del eje x
+	//y valor a convertir del eje y
+	//map(y, ymin, xmax, 0, s_max_x);  //func definida en linea 285 
 	
 	const int xmax = (tp_calx >> 16) & 0x3FFF;
 	const int xmin = tp_calx & 0x3FFF;
 	const int ymax = (tp_caly >> 16) & 0x3FFF;
 	const int ymin = tp_caly & 0x3FFF;
 	
+	LOG(LL_INFO, (" xmin:%d, xmax:%d Z:%d", xmin, xmax));
+	LOG(LL_INFO, (" ymin:%d, ymax:%d Z:%d", ymin, ymax));
   
 	switch(_lcd_orientation)
 	{
@@ -315,10 +322,9 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 	    *x_out = map(y, ymin, xmax, 0, s_max_x);
 	    *y_out = s_max_y - map(x, xmin, ymax, 0, s_max_y);
 	    break;
-	case XPT2046_LANDSCAPE_FLIP_REVERSE:  // 4
-	    //*x_out = map(y, ymin, xmax, 0, s_max_x);  //ok 3
+	case XPT2046_LANDSCAPE_FLIP_REVERSE:  // 4  igual que el 3 pero invirtiendo x
+	    //*x_out = map(y, ymin, xmax, 0, s_max_x);  //ok = 3 (XPT2046_LANDSCAPE_FLIP)
 	    *x_out = s_max_x - map(y, ymin, xmax, 0, s_max_x);
-		//*x_out = s_max_x - *x_out;
 	    *y_out = s_max_y - map(x, xmin, ymax, 0, s_max_y);
 	  
 	    break;
