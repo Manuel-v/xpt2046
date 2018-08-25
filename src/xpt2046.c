@@ -292,11 +292,15 @@ static long map(long x, long in_min, long in_max, long out_min, long out_max)
 
 static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16_t *y_out)
 {
+	//s_max_x = x;  //tama?o en pixel de la pantalla en eje x declarado en linea 471
+	//s_max_y = y;  //tama?o en pixel de la pantalla en eje y declarado en linea 472
+	
 	const int xmax = (tp_calx >> 16) & 0x3FFF;
 	const int xmin = tp_calx & 0x3FFF;
 	const int ymax = (tp_caly >> 16) & 0x3FFF;
 	const int ymin = tp_caly & 0x3FFF;
-
+	
+  
 	switch(_lcd_orientation)
 	{
 	case XPT2046_LANDSCAPE: // 1
@@ -312,8 +316,9 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 	    *y_out = s_max_y - map(x, xmin, ymax, 0, s_max_y);
 	    break;
 	case XPT2046_LANDSCAPE_FLIP_REVERSE:  // 4
-	    //*x_out = map(y, ymin, xmax, 0, s_max_x);
-	    *x_out = s_max_y - map(x, xmin, xmax, 0, s_max_y);
+	    //*x_out = map(y, ymin, xmax, 0, s_max_x);  //ok 3
+	    *x_out = s_max_x - map(y, ymin, xmax, 0, s_max_x);
+		//*x_out = s_max_x - *x_out;
 	    *y_out = s_max_y - map(x, xmin, ymax, 0, s_max_y);
 	  
 	    break;
@@ -464,8 +469,8 @@ bool mgos_xpt2046_is_touching(void)
 
 void mgos_xpt2046_set_dimensions(const uint16_t x, const uint16_t y)
 {
-	s_max_x = x;
-	s_max_y = y;
+	s_max_x = x;  //tama?o en pixel de la pantalla en eje x
+	s_max_y = y;  //tama?o en pixel de la pantalla en eje y
 	LOG(LL_INFO, ("X=%d Y=%d", x, y ));
 }
 
