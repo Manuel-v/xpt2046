@@ -300,11 +300,15 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 	//y valor a convertir del eje y
 	//map(y, ymin, xmax, 0, s_max_x);  //func definida en linea 285 
 	
-	const int xmax = (tp_calx >> 16) & 0x3FFF;
-	const int xmin = tp_calx & 0x3FFF;
-	const int ymax = (tp_caly >> 16) & 0x3FFF;
-	const int ymin = tp_caly & 0x3FFF;
+	//const int xmax = (tp_calx >> 16) & 0x3FFF;
+	//const int xmin = tp_calx & 0x3FFF;
+	//const int ymax = (tp_caly >> 16) & 0x3FFF;
+	//const int ymin = tp_caly & 0x3FFF;
 	
+	const int xmax = mgos_sys_config_get_xpt2046_dac_portrait_min_xmax();
+	const int xmin = mgos_sys_config_get_xpt2046_dac_portrait_max_xmin();
+	const int ymax = mgos_sys_config_get_xpt2046_dac_landscape_min_ymax();
+	const int ymin = mgos_sys_config_get_xpt2046_dac_landscape_max_ymin();
   
 	switch(_lcd_orientation)
 	{
