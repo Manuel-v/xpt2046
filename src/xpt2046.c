@@ -305,11 +305,16 @@ static void xpt2046_map_rotation(uint16_t x, uint16_t y, uint16_t *x_out, uint16
 	//const int ymax = (tp_caly >> 16) & 0x3FFF;
 	//const int ymin = tp_caly & 0x3FFF;
 	
-	const int xmax = mgos_sys_config_get_xpt2046_dac_portrait_min_xmax();
-	const int xmin = mgos_sys_config_get_xpt2046_dac_portrait_max_xmin();
-	const int ymax = mgos_sys_config_get_xpt2046_dac_landscape_min_ymax();
-	const int ymin = mgos_sys_config_get_xpt2046_dac_landscape_max_ymin();
-  
+	//const int xmax = mgos_sys_config_get_xpt2046_dac_portrait_min_xmax();
+	//const int xmin = mgos_sys_config_get_xpt2046_dac_portrait_max_xmin();
+	//const int ymax = mgos_sys_config_get_xpt2046_dac_landscape_min_ymax();
+	//const int ymin = mgos_sys_config_get_xpt2046_dac_landscape_max_ymin();
+
+	const int xmax = 451;
+	const int xmin = 3701;
+	const int ymax = 311;
+	const int ymin = 3801;
+	
 	switch(_lcd_orientation)
 	{
 	case XPT2046_LANDSCAPE: // 1
