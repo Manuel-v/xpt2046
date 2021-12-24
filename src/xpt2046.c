@@ -4,7 +4,7 @@
 #include "mgos.h"
 #include "mgos_config.h"
 #include "mgos_spi.h"
-#include "driver/gpio.h"
+#include "driver/gpio.h"  //modificado dic2021
 
 #include "xpt2046.h"
 
